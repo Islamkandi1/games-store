@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme{
+    --color-main:#38E07B;
+    --color-light:#fff;
+    --color-dark:#000;
+    --color-nav:#143522;
+    --color-bgDark:#122118;
+}
+body{
+    font-family: system-ui, sans-serif;
+}
+.active{
+    color: #38E07B;
+}
+.heading{
+    background: url("./assets/images/Landing-hero-banner.jpg") center/cover;
+}
+.btn{
+    @apply px-4 py-3 bg-main capitalize text-light rounded-xl text-[1rem] md:text-[1.1rem] cursor-pointer
+}
