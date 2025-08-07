@@ -20,8 +20,6 @@ const Games = () => {
 
   // get next page==================================================
   function getPage(page) {
-    console.log(page);
-
     setCurrentPage(page);
   }
   // get api
@@ -74,34 +72,33 @@ const Games = () => {
         ) : (
           ""
         )}
+
+        <div className="flex justify-center mb-4 ">
+          <Mypagination currentPage={currentPage} getPage={getPage} />
+        </div>
         {loader == false ? (
           <p className="flex justify-center h-dvh items-center ">
             <PacmanLoader color="#30e767" />
           </p>
         ) : (
-          <section>
-            <div className="flex justify-center mb-4 ">
-              <Mypagination currentPage={currentPage} getPage={getPage} />
-            </div>
-            <section className="grid   gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-[2.5rem] justify-center">
-              {api.map((ele, idx) => {
-                return (
-                  <Card
-                    getGame={getGame}
-                    openModal={openModall}
-                    key={idx}
-                    ele={ele}
-                    loader={loader}
-                    setLoader={setLoader}
-                  ></Card>
-                );
-              })}
-            </section>
-             <div className="flex justify-center mb-4 ">
-              <Mypagination currentPage={currentPage} getPage={getPage} />
-            </div>  
+          <section className="grid   gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-[2.5rem] justify-center">
+            {api.map((ele, idx) => {
+              return (
+                <Card
+                  getGame={getGame}
+                  openModal={openModall}
+                  key={idx}
+                  ele={ele}
+                  loader={loader}
+                  setLoader={setLoader}
+                ></Card>
+              );
+            })}
           </section>
         )}
+        <div className="flex justify-center mb-4 ">
+          <Mypagination currentPage={currentPage} getPage={getPage} />
+        </div>
       </section>
 
       {openModal && <Modal modalData={modalData} openModal={openModall} />}

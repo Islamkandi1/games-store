@@ -66,7 +66,7 @@ const Navbar = ({mood,setMood}) => {
   return (
     <>
       <nav
-        className={` px-3 ${changeNavHeight} transition-all duration-500  bg-emerald-800    dark:bg-nav   fixed top-0 start-0 end-0`}
+        className={` px-3 ${changeNavHeight} transition-all z-40 duration-500  bg-emerald-800    dark:bg-nav   fixed top-0 start-0 end-0`}
       >
         <div className="container mx-auto flex flex-wrap items-center justify-between lg:px-[4rem]">
           <a className="uppercase text-4xl text-light  dark:text-light  tracking-widest">

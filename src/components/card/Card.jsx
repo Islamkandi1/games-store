@@ -1,6 +1,5 @@
 import React from "react";
 import { FaStar } from "react-icons/fa6";
-
 import Platform from "./../platform/Platform";
 import Button from "./../button/Button";
 import { PacmanLoader } from "react-spinners";
