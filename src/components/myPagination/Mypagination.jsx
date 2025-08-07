@@ -7,6 +7,7 @@ const Mypagination = ({ getPage, currentPage }) => {
       <Pagination
         count={300}
         onChange={(event, value) => getPage(value)}
+        onClick={scrollTo({top:0,behavior:"smooth"})}
         page={currentPage}
         color="success"
         sx={{

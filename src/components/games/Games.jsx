@@ -66,7 +66,7 @@ const Games = () => {
     const controller = new AbortController();
     getGames(controller.signal);
     return () => {
-      controller.abort(); //! the useeffect looks to unmount for a second so it is canceld thin make the request correct
+      controller.abort(); 
     };
   }, [currentPage]);
   // ? jsx code ===================================================
