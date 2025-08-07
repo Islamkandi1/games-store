@@ -3,7 +3,7 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { MdDarkMode } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { CiLight } from "react-icons/ci";
-const Navbar = ({mood,setMood}) => {
+const Navbar = ({ mood, setMood }) => {
   const [navMobil, setNavMobile] = useState(false);
   const [changeNavHeight, setChangeNavHeight] = useState("py-5");
   // ? change navbar==================
@@ -51,13 +51,11 @@ const Navbar = ({mood,setMood}) => {
   // change mood=================================
   function changeMood() {
     if (mood == "light") {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.replace("light", "dark");
       setMood("dark");
       localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
+      document.documentElement.classList.replace("dark", "light");
       setMood("light");
       localStorage.setItem("theme", "light");
     }
@@ -74,14 +72,14 @@ const Navbar = ({mood,setMood}) => {
           </a>
           <section className="flex  gap-5">
             {mood == "dark" ? (
-              <MdDarkMode
-                className=" text-light cursor-pointer text-[1.4rem] md:hidden"
-                onClick={changeMood}
-              />
-            ) : (
               <CiLight
                 onClick={changeMood}
                 className=" text-light cursor-pointer text-[1.4rem] md:hidden"
+              />
+            ) : (
+              <MdDarkMode
+                className=" text-light cursor-pointer text-[1.4rem] md:hidden"
+                onClick={changeMood}
               />
             )}
             <FaBarsStaggered
@@ -101,7 +99,7 @@ const Navbar = ({mood,setMood}) => {
                     to="/"
                     className="block px-3 py-2 capitalize  text-[1.2rem] lg:text-[1.2rem] lg:mx-1  text-light dark:text-light  rounded-xl   "
                     aria-current="page"
-                    onClick={()=>setNavMobile(false)}
+                    onClick={() => setNavMobile(false)}
                   >
                     Home
                   </NavLink>
@@ -111,7 +109,7 @@ const Navbar = ({mood,setMood}) => {
                     to="/about"
                     className="block px-3 py-2 capitalize  text-[1.2rem] lg:text-[1.2rem] lg:mx-1  text-light dark:text-light  rounded-xl   "
                     aria-current="page"
-                    onClick={()=>setNavMobile(false)}
+                    onClick={() => setNavMobile(false)}
                   >
                     about
                   </NavLink>
@@ -121,7 +119,7 @@ const Navbar = ({mood,setMood}) => {
                     to="/games"
                     className="block px-3 py-2 capitalize  text-[1.2rem] lg:text-[1.2rem] lg:mx-1   text-light dark:text-light  rounded-xl"
                     aria-current="page"
-                    onClick={()=>setNavMobile(false)}
+                    onClick={() => setNavMobile(false)}
                   >
                     games
                   </NavLink>
@@ -131,21 +129,21 @@ const Navbar = ({mood,setMood}) => {
                     to="/contact"
                     className="block px-3 py-2 capitalize  text-[1.2rem] lg:text-[1.2rem] lg:mx-1   text-light dark:text-light  rounded-xl"
                     aria-current="page"
-                    onClick={()=>setNavMobile(false)}
+                    onClick={() => setNavMobile(false)}
                   >
                     contact us
                   </NavLink>
                 </li>
               </ul>
               {mood == "dark" ? (
-                <MdDarkMode
-                  className="hidden text-light cursor-pointer text-[1.4rem] md:block"
-                  onClick={changeMood}
-                />
-              ) : (
                 <CiLight
                   onClick={changeMood}
                   className="hidden text-light cursor-pointer text-[1.4rem] md:block"
+                />
+              ) : (
+                <MdDarkMode
+                  className="hidden text-light cursor-pointer text-[1.4rem] md:block"
+                  onClick={changeMood}
                 />
               )}
             </section>
