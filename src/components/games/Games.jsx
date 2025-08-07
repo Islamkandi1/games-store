@@ -12,6 +12,7 @@ const Games = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [showPagination, setShowPagination] = useState("flex");
   // *open & close modal==============================
   function openModall(boolean) {
     setOpenModal(boolean);
@@ -25,6 +26,7 @@ const Games = () => {
   // get api
   async function getGames(signal) {
     try {
+      setShowPagination("flex");
       setLoader(false);
       const { data } = await axios.get(
         `https://api.rawg.io/api/games?key=${key}&page=${currentPage}`,
@@ -36,6 +38,7 @@ const Games = () => {
       if (axios.isCancel(error)) {
         setLoader(false); // ! if i put it at the finally there is a delay happened couse of th setLoader is Async so it woudnot wait to make it true
       } else {
+        setShowPagination("hidden");
         setError("some thing went wrong");
         setLoader(true); // ! if i put it at the finally there is a delay happened couse of th setLoader is Async so it woudnot wait to make it true
       }
@@ -73,32 +76,31 @@ const Games = () => {
           ""
         )}
 
-        <div className="flex justify-center mb-4 ">
-          <Mypagination currentPage={currentPage} getPage={getPage} />
-        </div>
         {loader == false ? (
           <p className="flex justify-center h-dvh items-center ">
             <PacmanLoader color="#30e767" />
           </p>
         ) : (
-          <section className="grid   gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-[2.5rem] justify-center">
-            {api.map((ele, idx) => {
-              return (
-                <Card
-                  getGame={getGame}
-                  openModal={openModall}
-                  key={idx}
-                  ele={ele}
-                  loader={loader}
-                  setLoader={setLoader}
-                ></Card>
-              );
-            })}
-          </section>
+          <>
+            <section className="grid   gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-[2.5rem] justify-center">
+              {api.map((ele, idx) => {
+                return (
+                  <Card
+                    getGame={getGame}
+                    openModal={openModall}
+                    key={idx}
+                    ele={ele}
+                    loader={loader}
+                    setLoader={setLoader}
+                  ></Card>
+                );
+              })}
+            </section>
+            <div className={` ${showPagination} justify-center mb-4 `}>
+              <Mypagination currentPage={currentPage} getPage={getPage} />
+            </div>
+          </>
         )}
-        <div className="flex justify-center mb-4 ">
-          <Mypagination currentPage={currentPage} getPage={getPage} />
-        </div>
       </section>
       {openModal && <Modal modalData={modalData} openModal={openModall} />}
       {/* head tag meat============================================= */}
