@@ -100,7 +100,6 @@ const Games = () => {
           <Mypagination currentPage={currentPage} getPage={getPage} />
         </div>
       </section>
-
       {openModal && <Modal modalData={modalData} openModal={openModall} />}
       {/* head tag meat============================================= */}
       <meta
