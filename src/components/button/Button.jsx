@@ -10,7 +10,7 @@ const Button = ({handleModal}) => {
         type="button"
         className="cursor-pointer relatve bottom-[20px] capitalize text-[1.1rem]  flex items-center px-3 py-2 text-sm font-medium text-center text-light bg-main rounded-lg hover:bg-green-300 transition-all duration-300  "
       >
-        show more
+        see more
         <svg
           className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
           aria-hidden="true"

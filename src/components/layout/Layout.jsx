@@ -4,11 +4,11 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Footer from './../footer/Footer';
 import UpBtn from '../upBtn/UpBtn';
 
-const Layout = () => {
+const Layout = ({mood,setMood}) => {
   return (
     <>
     <ScrollRestoration/>
-    <Navbar/>
+    <Navbar mood={mood} setMood={setMood}/>
     <Outlet/>
     <Footer/>
     <UpBtn/>

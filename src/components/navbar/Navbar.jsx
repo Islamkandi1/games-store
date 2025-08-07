@@ -3,10 +3,9 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { MdDarkMode } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { CiLight } from "react-icons/ci";
-const Navbar = () => {
+const Navbar = ({mood,setMood}) => {
   const [navMobil, setNavMobile] = useState(false);
   const [changeNavHeight, setChangeNavHeight] = useState("py-5");
-  const [mood, setMood] = useState(localStorage.theme);
   // ? change navbar==================
   function changeNav() {
     if (navMobil == false) {

@@ -2,25 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { PacmanLoader } from "react-spinners";
 import Card from "./../card/Card";
-import Pagination from "./../pagination/Pagination";
 import Modal from "./../Modal/Modal";
+import Mypagination from "../myPagination/Mypagination";
 const key = "e6e62cafa3ef481884a524b7b37485d9";
 const Games = () => {
   const [api, setApi] = useState([]);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState("");
-  const [currentPage, setCurrentPage] = useState(
-    localStorage.page != null ? localStorage.page : 1
-  );
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
   // *open & close modal==============================
   function openModall(boolean) {
     setOpenModal(boolean);
     document.body.style.overflow = "auto";
   }
+
   // get next page==================================================
   function getPage(page) {
+    console.log(page);
+
     setCurrentPage(page);
   }
   // get api
@@ -73,13 +74,15 @@ const Games = () => {
         ) : (
           ""
         )}
-        <Pagination getPage={getPage} />
         {loader == false ? (
           <p className="flex justify-center h-dvh items-center ">
             <PacmanLoader color="#30e767" />
           </p>
         ) : (
-          <>
+          <section>
+            <div className="flex justify-center mb-4 ">
+              <Mypagination currentPage={currentPage} getPage={getPage} />
+            </div>
             <section className="grid   gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-[2.5rem] justify-center">
               {api.map((ele, idx) => {
                 return (
@@ -94,9 +97,11 @@ const Games = () => {
                 );
               })}
             </section>
-          </>
+             <div className="flex justify-center mb-4 ">
+              <Mypagination currentPage={currentPage} getPage={getPage} />
+            </div>  
+          </section>
         )}
-        <Pagination getPage={getPage} />
       </section>
 
       {openModal && <Modal modalData={modalData} openModal={openModall} />}

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import axios from "./../../../node_modules/axios/lib/axios";
 import PacmanLoader from "./../../../node_modules/react-spinners/esm/PacmanLoader";
-import Modal from "./../Modal/Modal";
 const key = "e6e62cafa3ef481884a524b7b37485d9";
 const Home = () => {
   const [api, setApi] = useState([]);
