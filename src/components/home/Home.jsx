@@ -17,12 +17,12 @@ const Home = () => {
       );
       const slice = data.results.slice(0, 9);
       setApi(slice);
-      setLoader(true);
     } catch (error) {
-      if (error.code == "ERR_BAD_REQUEST") {
+      if (error) {
         setError("some thing went wrong");
-        setLoader(true); // ? look to games compo
       }
+    } finally {
+      setLoader(true);
     }
   }
   // * handle useEffect==================================
@@ -30,7 +30,7 @@ const Home = () => {
     const controller = new AbortController();
     getGames(controller.signal);
     return () => {
-      controller.abort(); // ! some thing wrong about it
+      controller.abort(); // ! some thing wrong about it at strict mood 
     };
   }, []);
   // ? jsx code =====================================================

@@ -11,6 +11,7 @@ const Games = () => {
   const [error, setError] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [modalError, modalModalError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [showPagination, setShowPagination] = useState("flex");
   // *open & close modal==============================
@@ -18,7 +19,6 @@ const Games = () => {
     setOpenModal(boolean);
     document.body.style.overflow = "auto";
   }
-
   // get next page==================================================
   function getPage(page) {
     setCurrentPage(page);
@@ -33,24 +33,33 @@ const Games = () => {
         { signal }
       );
       setApi(data.results);
-      setLoader(true);
     } catch (error) {
-      if (axios.isCancel(error)) {
-        setLoader(false); // ! if i put it at the finally there is a delay happened couse of th setLoader is Async so it woudnot wait to make it true
-      } else {
+      if (error) {
+        setLoader(false);
         setShowPagination("hidden");
         setError("some thing went wrong");
-        setLoader(true); // ! if i put it at the finally there is a delay happened couse of th setLoader is Async so it woudnot wait to make it true
       }
+    } finally {
+      setLoader(true);
+      // ! strict mood
     }
   }
   // get spacific game==============================================
   async function getGame(id) {
-    const { data } = await axios.get(
-      `https://api.rawg.io/api/games/${id}?key=${key}`
-    );
-    setModalData(data);
-    setLoader(true);
+    try {
+      setLoader(false);
+      modalModalError(false)
+      const { data } = await axios.get(
+        `https://api.rawg.io/api/games/${id}?key=${key}`
+      );
+      setModalData(data);
+    } catch (error) {
+      if (error) {
+        modalModalError("something went wrong")
+      }
+    } finally {
+      setLoader(true);
+    }
   }
   // * handle useEffect==================================
   useEffect(() => {
@@ -102,7 +111,9 @@ const Games = () => {
           </>
         )}
       </section>
-      {openModal && <Modal modalData={modalData} openModal={openModall} />}
+      {openModal && (
+        <Modal modalData={modalData} openModal={openModall} loader={loader} modalError={modalError}/>
+      )}
       {/* head tag meat============================================= */}
       <meta
         name="description"
