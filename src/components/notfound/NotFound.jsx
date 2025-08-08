@@ -20,7 +20,6 @@ const NotFound = () => {
         </div>
       </section>
       {/* head tags */}
-
       <title>page not found</title>
     </>
   );

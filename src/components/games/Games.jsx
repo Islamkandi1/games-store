@@ -4,6 +4,7 @@ import { PacmanLoader } from "react-spinners";
 import Card from "./../card/Card";
 import Modal from "./../Modal/Modal";
 import Mypagination from "../myPagination/Mypagination";
+import Button from './../button/Button';
 const key = "e6e62cafa3ef481884a524b7b37485d9";
 const Games = () => {
   const [api, setApi] = useState([]);
@@ -48,25 +49,30 @@ const Games = () => {
   async function getGame(id) {
     try {
       setLoader(false);
-      modalModalError(false)
+      modalModalError(false);
       const { data } = await axios.get(
         `https://api.rawg.io/api/games/${id}?key=${key}`
       );
       setModalData(data);
     } catch (error) {
       if (error) {
-        modalModalError("something went wrong")
+        modalModalError("something went wrong");
       }
     } finally {
       setLoader(true);
     }
+  }
+  // open modal==========================
+  function handleModal(ele) {
+    openModall(true);
+    getGame(ele.id);
   }
   // * handle useEffect==================================
   useEffect(() => {
     const controller = new AbortController();
     getGames(controller.signal);
     return () => {
-      controller.abort(); 
+      controller.abort();
     };
   }, [currentPage]);
   // ? jsx code ===================================================
@@ -96,12 +102,11 @@ const Games = () => {
                 return (
                   <Card
                     getGame={getGame}
-                    openModal={openModall}
                     key={idx}
                     ele={ele}
                     loader={loader}
                     setLoader={setLoader}
-                  ></Card>
+                  ><Button handleModal={()=>{handleModal(ele)}} /></Card>
                 );
               })}
             </section>
@@ -112,7 +117,12 @@ const Games = () => {
         )}
       </section>
       {openModal && (
-        <Modal modalData={modalData} openModal={openModall} loader={loader} modalError={modalError}/>
+        <Modal
+          modalData={modalData}
+          openModal={openModall}
+          loader={loader}
+          modalError={modalError}
+        />
       )}
       {/* head tag meat============================================= */}
       <meta

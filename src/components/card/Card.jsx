@@ -2,11 +2,8 @@ import React from "react";
 import { FaStar } from "react-icons/fa6";
 import Platform from "./../platform/Platform";
 import Button from "./../button/Button";
-const Card = ({ ele, openModal, getGame }) => {
-  function handleModal() {
-    openModal(true);
-    getGame(ele.id);
-  }
+const Card = ({ ele,children }) => {
+
   //? return suit icon=========================
   return (
     <>
@@ -28,7 +25,7 @@ const Card = ({ ele, openModal, getGame }) => {
             <p className="text-nav dark:text-light font-medium">{ele.rating}</p>
           </section>
           <section className="flex justify-between items-center">
-            <Button handleModal={handleModal} />
+            {children}
             <section className="flex items-center gap-3">
               <Platform ele={ele} />
             </section>

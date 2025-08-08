@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import axios from "./../../../node_modules/axios/lib/axios";
 import PacmanLoader from "./../../../node_modules/react-spinners/esm/PacmanLoader";
+import Card from './../card/Card';
 const key = "e6e62cafa3ef481884a524b7b37485d9";
 const Home = () => {
   const [api, setApi] = useState([]);
@@ -75,35 +76,9 @@ const Home = () => {
           ) : (
             <section className="grid gap-4  grid-cols-1 md:grid-cols-2   w-full   sm:grid-cols-2 lg:grid-cols-3 mb-[2.5rem]">
               {api.map((ele, idx) => {
-                return (
-                  <div
-                    key={idx}
-                    className="flex flex-col justify-between   border border-gray-200 rounded-lg shadow-sm dark:bg-nav dark:border-gray-700"
-                  >
-                    <img
-                      className="rounded-t-lg h-[200px] object-cover  w-full"
-                      src={ele.background_image}
-                    />
-                    <div className="p-5 ">
-                      <h5 className=" text-2xl font-bold tracking-tight   text-green-700  dark:text-light">
-                        {ele.name.split(" ", 5).join(" ")}
-                      </h5>
-                      <section className="flex items-center p-3 mb-3   gap-2">
-                        <section className="flex gap-1">
-                          {Array.from({ length: ele.rating_top }).map(
-                            (_, idx) => (
-                              <FaStar key={idx} className="text-amber-300 " />
-                            )
-                          )}
-                        </section>
-                        <p className="text-nav dark:text-light font-medium">
-                          {ele.rating}
-                        </p>
-                      </section>
-                    </div>
-                  </div>
-                );
+                return <Card ele={ele} key={idx}/>
               })}
+             
             </section>
           )}
           <Link
